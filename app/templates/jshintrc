@@ -1,0 +1,14 @@
+{
+  "node": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "undef": true,
+  "unused": true,
+  "strict": true,
+  "trailing": true,
+  "white": true,
+  "globals": {
+    "angular": true
+  }
+}

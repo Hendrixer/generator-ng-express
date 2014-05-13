@@ -1,0 +1,14 @@
+{
+  "name": "<%= _.slugify(_.humanize(name)) %>",
+  "version": "<%= version %>",
+  "dependencies": {
+    "bootstrap-css-only": "*",
+    "angular": "*" <% if(ngRoute) { %>,
+    "angular-route": "*"<% } %><% if(ngTouch) { %>,
+    "angular-touch": "*"<% } %><% if(ngCookies) { %>,
+    "angular-cookies": "*"<% } %><% if(ngFx) { %>,
+    "ng-Fx": "*"<% } %><% if(uiRouter) { %>,
+    "angular-ui-router": "*"<% } %>
+  }
+}
+
