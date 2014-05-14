@@ -208,10 +208,10 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
       injectables.push('"ui.router"');
       provide.push('$stateProvider', '$urlRouterProvider');
       this.route = 'uiRoute';
-      if (this.ngRoute) {
-        provide.splice(provide.indexOf('$routeProvider'), 1);
+      var index = provide.indexOf('$routeProvider');
+      if (index > 0) {
+        provide.splice(index, 1);
       }
-
     }
 
     this.injectables = '\n    ' + injectables.join(',\n    ') + '\n';
@@ -257,7 +257,6 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
   },
   dotFiles: function () {
     this.copy('gitignore', '.gitignore');
-    this.copy('jshintrc', '.jshintrc');
     this.copy('bowerrc', '.bowerrc');
   },
 
