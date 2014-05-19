@@ -23,13 +23,28 @@ $ npm install -g yo
 
 Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
 
+### Features
+
+* MEAN stack
+* super light weight
+* choose your routing
+* clean express server 
+
 To install generator-ng-express from npm, run:
 
 ```bash
 $ npm install -g generator-ng-express
 ```
+Install Gulp globally
 
-Finally, initiate the generator:
+```bash
+npm install -g gulp
+```
+
+Download the LiveReload extension for your browser, here is the link for [Chrome](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei)
+
+
+Locate the directory where you want to make the app if you're not there already and initiate the generator:
 
 ```bash
 $ yo ng-express
