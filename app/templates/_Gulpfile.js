@@ -9,7 +9,7 @@ var gulp    = require('gulp'),
     list    = require('gulp-task-listing'),
     nodemon = require('gulp-nodemon'),
     lr_port = 35729,
-    <%= cssPre %>   = require('gulp-<%= cssPre %>');
+    <% if (cssPre !== 'none') {%><%= cssPre %>   = require('gulp-<%= cssPre %>');<% } %>
 
 
 var paths = {
@@ -21,7 +21,7 @@ var paths = {
     dest: 'client/styles/css'
   }
 };
-var build = ['<%= cssPre %>', 'css', 'lint'];
+var build = ['<% if (cssPre !== 'none') {%><%= cssPre %><% } %>', 'css', 'lint'];
 
 <% if(cssPre === 'stylus')  { %>
 var stylus = require('gulp-stylus');
