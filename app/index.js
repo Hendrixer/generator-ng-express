@@ -14,7 +14,8 @@ var notes = {
     '• Custom mode: You decide what you want.',
   complete: '\n\nCongrats! Your angular app is ready for you!' +
     '\n \nRun "gulp" to start up your server on port 9000' +
-    '\n \nMake sure you start Mongo first!'
+    '\n \nMake sure you start Mongo first!' +
+    '\n \nDownload and enable the Live Reolad plugin for your browser.'
 };
 
 var root = path.basename(process.cwd());
