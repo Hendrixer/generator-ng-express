@@ -1,3 +1,29 @@
-<div>
-  <h1>Home</h1>
-</div>
+<!-- nav bar for entire app -->
+<header>
+  <nav class='navbar navbar-default navbar-fixed-top' role='navigation'>
+    <div class='container-fluid'>
+      <div class='navbar-header'>
+        <a class="navbar-brand" ui-sref='<%= name %>.main'><%= name %></a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li>
+          <a ui-sref="<%= name %>.main">Home</a>
+        </li>
+        <li>
+          <a ui-sref="<%= name %>.main.notes">Notes</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- template loaded here -->
+<main ui-view>
+
+</main>
+
+<!-- footer for the whole app -->
+<footer>
+
+</footer>
+

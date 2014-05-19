@@ -30,7 +30,7 @@ var hasOption = function (options, option) {
 
 var defaults = {
   depend: ["'ui.router'", "'ngAnimate'", "'fx.animations'"],
-  provides: ['$urlRouterProvider', '$stateProvider']
+  provides: ['$stateProvider']
 };
 
 var NgExpressGenerator = yeoman.generators.Base.extend({
@@ -53,12 +53,11 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     this.ngCookies = true;
     this.ngTouch = false;
     this.ngResource = false;
-    this.route = 'uiRouter';
     this.providers = defaults.provides.join(', ');
     this.injectables = '\n    ' + defaults.depend.join(',\n    ') + '\n';
 
     this.extra = false;
-    this.uiRouter = true;
+    this.uiRouter = false;
     this.ngFx = true;
 
     /* Express stuff */
@@ -95,6 +94,15 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
+  quick: function () {
+    if (this.mode === 'Quick') {
+      this.uiRouter = true;
+      this.ngRoute = false;
+      this.ngAnimate = true;
+      this.ngFx = true;
+      this.cssPre = 'stylus';
+    }
+  },
   custom: function () {
     var done,
         questions;
@@ -112,7 +120,7 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
         {
           type: 'checkbox',
           name: 'modules',
-          message: 'What official angular modules do you need?\n Use spacebar to select',
+          message: 'What official angular modules do you need?\n Use spacebar to select and enter when finished',
           choices: [
                 {
                   value: 'ngAnimate',
@@ -144,11 +152,11 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
                 {
                   value: 'ngFx',
                   name: 'ng-Fx (awesome animation library)',
-                  checked: this.ngRoute ? true : false
+                  checked: this.ngAnimate ? true : false
                 },
                 {
                   value: 'uiRouter',
-                  name: 'angular-ui-router.js (advanced compared to ngRoute)',
+                  name: 'angular-ui-router.js (will replace ngRoute)',
                   checked: false
                 }
           ]
@@ -178,53 +186,66 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     var injectables = [],
         provide = [];
 
+    if (this.mode === 'Custom') {
+      this.ngAnimate = hasOption(modules, 'ngAnimate');
+      this.ngCookies = hasOption(modules, 'ngCookies');
+      this.ngTouch = hasOption(modules, 'ngTouch');
+      this.uiRouter = hasOption(extras, 'uiRouter');
+      this.ngRoute = hasOption(modules, 'ngRoute');
+      this.ngFx = hasOption(extras, 'ngFx');
 
-    this.ngAnimate = hasOption(modules, 'ngAnimate');
-    this.ngCookies = hasOption(modules, 'ngCookies');
-    this.ngTouch = hasOption(modules, 'ngTouch');
-    this.ngRoute = hasOption(modules, 'ngRoute');
+      if(this.ngRoute && this.uiRouter) {
+        this.ngRoute = false;
+      }
+    }
 
-    this.uiRouter = hasOption(extras, 'uiRouter');
-    this.ngFx = hasOption(extras, 'ngFx');
-
+    if (this.ngFx) {
+      this.ngAnimate = true;
+      injectables.push('fx.animations');
+    }
     if (this.ngAnimate) {
-      injectables.push('"ngAnimate"');
+      injectables.push('ngAnimate');
     }
     if (this.ngRoute) {
-      injectables.push('"ngRoute"');
+      injectables.push('ngRoute');
       provide.push('$routeProvider');
-      this.route = 'ngRoute';
     }
     if (this.ngTouch) {
-      injectables.push('"ngTouch"');
+      injectables.push('ngTouch');
     }
     if (this.ngCookies) {
-      injectables.push('"ngCookies"');
-    }
-    if (this.ngFx) {
-      injectables.push('"fx.animations"');
+      injectables.push('ngCookies');
     }
     if (this.uiRouter) {
-      injectables.push('"ui.router"');
-      provide.push('$stateProvider', '$urlRouterProvider');
-      this.route = 'uiRoute';
-      if (this.ngRoute) {
-        provide.splice(provide.indexOf('$routeProvider'), 1);
-      }
-
+      injectables.push('ui.router');
+      provide.push('$stateProvider');
     }
 
-    this.injectables = '\n    ' + injectables.join(',\n    ') + '\n';
+    this.injectables = injectables;
     this.providers = provide.join(', ');
   },
 
   app: function () {
     this.mkdir('client');
-    this.template('client/_index.html', 'client/index.html');
-    this.template('client/common/_filter.js', 'client/common/filters.js');
-    this.template('client/home/_home.html', 'client/home/home.html');
-    this.template('client/home/_home.js', 'client/home/home.js');
-    this.template('client/_app.js', 'client/app.js');
+    if(this.uiRouter) {
+      this.template('client/_index.html', 'client/index.html');
+      this.template('client/common/_directives.js', 'client/common/directives.js');
+      this.template('client/home/_home.html', 'client/main/main.tpl.html');
+      this.template('client/home/_home.js', 'client/main/main.js');
+      this.template('client/_app.js', 'client/app.js');
+      this.template('client/notes/_note.html', 'client/note/note.tpl.html');
+      this.template('client/notes/_note.js', 'client/note/note.js');
+      this.template('client/notes/_note.directive.html', 'client/note/note.directive.html');
+    } else if (this.ngRoute) {
+      this.template('client_router/_index.html', 'client/index.html');
+      this.template('client_router/common/_directives.js', 'client/common/directives.js');
+      this.template('client_router/main/_main.tpl.html', 'client/main/main.tpl.html');
+      this.template('client_router/main/_main.js', 'client/main/main.js');
+      this.template('client_router/note/_note.tpl.html', 'client/note/note.tpl.html');
+      this.template('client_router/note/_note.js', 'client/note/note.js');
+      this.template('client_router/_app.js', 'client/app.js');
+    }
+
 
     // this.copy('client/assets/_angular.jpeg', 'client/assets/angular.jpeg');
     this.copy('client/styles/css/_app.css', 'client/styles/css/app.css');
@@ -257,7 +278,6 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
   },
   dotFiles: function () {
     this.copy('gitignore', '.gitignore');
-    this.copy('jshintrc', '.jshintrc');
     this.copy('bowerrc', '.bowerrc');
   },
 

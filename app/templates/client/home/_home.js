@@ -1,32 +1,15 @@
 (function (angular) {
   "use strict";
-  angular.module('<%= name %>.home', [
-      <% if(route === 'ngRoute') { %>
-        'ngRoute'
-      <% } %>
-      <% if(route === 'uiRoute') { %>
-        'ui.router'
-      <% } %>
-    ])
+  angular.module('<%= name %>.main', ['ui.router', '<%= name %>.main.note'])
   .config(function (<%= providers %>) {
-    <% if(route === 'ngRoute') { %>
-    $routeProvider
-      .when('/home', {
-        templateUrl: 'home/home.html',
-        controller: 'HomeController'
-      });
-    <% } %>
-    <% if(route === 'uiRoute') { %>
-    $urlRouterProvider.otherwise('home');
     $stateProvider
-      .state('home', {
-        url: '/home',
-        template: 'home/home.html',
-        controller: 'HomeController'
+      .state('<%= name %>.main', {
+        url: '/main',
+        templateUrl: 'main/main.tpl.html',
+        controller: 'MainController'
       });
-    <% } %>
   })
-  .controller('HomeController', function () {
-    $scope.name = 'Home';
+  .controller('MainController', function ($state) {
+    $state.transitionTo('<%= name %>.main.note');
   });
-}(angular))
+}(angular));

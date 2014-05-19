@@ -9,11 +9,27 @@
   <link rel="stylesheet" href="styles/css/app.css"/>
 </head>
   <body>
-
-    <div ui-view></div>
+    <header>
+      <nav class='navbar navbar-default' role='navigation'>
+        <div class='container-fluid'>
+          <div class='navbar-header'>
+            <a class="navbar-brand" ui-sref='<%= name %>.main'><%= name %></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#/">Home</a>
+            </li>
+            <li>
+              <a href="#/notes">Notes</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div ng-view></div>
 
     <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/angular-route/angular-route.js"></script>
     <% if(ngAnimate) { %>
     <script src="lib/angular-animate/angular-animate.js"></script><% } %><% if(ngFx) { %><script src="lib/gsap/src/uncompressed/TweenMax.js"></script>
     <script src="lib/ng-Fx/dist/ng-Fx.js"></script><% } %>
