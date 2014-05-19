@@ -84,7 +84,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('serve', function () {
-  nodemon({script: 'server/server.js'})
+  nodemon({script: 'server/server.js', ignore: ['node_modules/**/*.js']})
     .on('restart', function () {
       refresh(client);
     });
