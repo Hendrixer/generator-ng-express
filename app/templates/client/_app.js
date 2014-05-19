@@ -1,6 +1,6 @@
 (function (angular) {
   "use strict";
-  angular.module('<%= name %>', [<% _each(injectables, function (mod,in){ %> '<%= mod %>', <% }); %> '<%= name %>.main'])
+  angular.module('<%= name %>', [<%= injectables %> ,'<%= name %>.main'])
   .config(function ($stateProvider) {
     $stateProvider
       .state('<%= name %>', {
