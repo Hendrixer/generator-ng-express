@@ -12,9 +12,9 @@ var notes = {
     '• Quick mode: Create your angular app with minmal options.' +
     '\n' +
     '• Custom mode: You decide what you want.',
-  complete: '\n\nCongrats! Your angular app is ready for you.' +
-    '\nRun "gulp" to start up your server on port 9000' +
-    '\nRun "gulp ?" to see all the tasks. Enjoy'
+  complete: '\n\nCongrats! Your angular app is ready for you!' +
+    '\n \nRun "gulp" to start up your server on port 9000' +
+    '\n \nMake sure you start Mongo first!'
 };
 
 var root = path.basename(process.cwd());
@@ -295,7 +295,7 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     if (err) {
       this.log.error(err);
     } else {
-      this.log(chalk.bold.magenta(notes.complete));
+      this.log(chalk.cyan(notes.complete));
     }
   }
 });
