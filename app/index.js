@@ -201,23 +201,23 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
 
     if (this.ngFx) {
       this.ngAnimate = true;
-      injectables.push('fx.animations');
+      injectables.push("'fx.animations'");
     }
     if (this.ngAnimate) {
-      injectables.push('ngAnimate');
+      injectables.push("'ngAnimate'");
     }
     if (this.ngRoute) {
-      injectables.push('ngRoute');
+      injectables.push("'ngRoute'");
       provide.push('$routeProvider');
     }
     if (this.ngTouch) {
-      injectables.push('ngTouch');
+      injectables.push("'ngTouch'");
     }
     if (this.ngCookies) {
-      injectables.push('ngCookies');
+      injectables.push("'ngCookies'");
     }
     if (this.uiRouter) {
-      injectables.push('ui.router');
+      injectables.push("'ui.router'");
       provide.push('$stateProvider');
     }
 
