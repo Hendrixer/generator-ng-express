@@ -221,7 +221,7 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
       provide.push('$stateProvider');
     }
 
-    this.injectables = injectables;
+    this.injectables = '\n    ' + injectables.join(',\n    ') + '\n';
     this.providers = provide.join(', ');
   },
 
