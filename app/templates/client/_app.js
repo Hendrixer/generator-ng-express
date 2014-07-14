@@ -1,7 +1,9 @@
 (function (angular) {
   "use strict";
   angular.module('<%= name %>', [<%= injectables %> ,'<%= name %>.main'])
-  .config(function ($stateProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/<%= name %>/main/note')
+    
     $stateProvider
       .state('<%= name %>', {
         abstract: true,
