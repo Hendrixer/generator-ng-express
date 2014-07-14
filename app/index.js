@@ -9,13 +9,13 @@ var notes = {
   intro: 'You can install ng-Express in two ways:',
 
   options: '\n\n' +
-    '• Quick mode: Create your angular app with minmal options.' +
+    '• Quick mode: Create your angular app with minimal options.' +
     '\n' +
     '• Custom mode: You decide what you want.',
   complete: '\n\nCongrats! Your angular app is ready for you!' +
     '\n \nRun "gulp" to start up your server on port 9000' +
     '\n \nMake sure you start Mongo first!' +
-    '\n \nDownload and enable the Live Reolad plugin for your browser.'
+    '\n \nDownload and enable the Live Reload plugin for your browser.'
 };
 
 var root = path.basename(process.cwd());
@@ -30,7 +30,7 @@ var hasOption = function (options, option) {
 };
 
 var defaults = {
-  depend: ["'ui.router'", "'ngAnimate'", "'fx.animations'"],
+  depend: ["'ui.router'", "ngFx"],
   provides: ['$stateProvider']
 };
 
@@ -49,7 +49,6 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     this.cssPre = 'none';
 
     /* angular stuff */
-    this.ngAnimate = true;
     this.ngRoute = false;
     this.ngCookies = true;
     this.ngTouch = false;
@@ -99,7 +98,6 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     if (this.mode === 'Quick') {
       this.uiRouter = true;
       this.ngRoute = false;
-      this.ngAnimate = true;
       this.ngFx = true;
       this.cssPre = 'stylus';
     }
@@ -124,11 +122,6 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
           message: 'What official angular modules do you need?\n Use spacebar to select and enter when finished',
           choices: [
                 {
-                  value: 'ngAnimate',
-                  name: 'angular-animate.js',
-                  checked: false
-                },
-                {
                   value: 'ngCookies',
                   name: 'angular-cookies.js',
                   checked: false
@@ -152,8 +145,8 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
           choices: [
                 {
                   value: 'ngFx',
-                  name: 'ng-Fx (awesome animation library)',
-                  checked: this.ngAnimate ? true : false
+                  name: 'ngFx (awesome animation library includes ngAnimate)',
+                  checked: true
                 },
                 {
                   value: 'uiRouter',
@@ -188,7 +181,6 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
         provide = [];
 
     if (this.mode === 'Custom') {
-      this.ngAnimate = hasOption(modules, 'ngAnimate');
       this.ngCookies = hasOption(modules, 'ngCookies');
       this.ngTouch = hasOption(modules, 'ngTouch');
       this.uiRouter = hasOption(extras, 'uiRouter');
@@ -201,11 +193,7 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     }
 
     if (this.ngFx) {
-      this.ngAnimate = true;
-      injectables.push("'fx.animations'");
-    }
-    if (this.ngAnimate) {
-      injectables.push("'ngAnimate'");
+      injectables.push("'ngFx");
     }
     if (this.ngRoute) {
       injectables.push("'ngRoute'");
