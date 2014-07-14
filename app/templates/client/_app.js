@@ -6,6 +6,7 @@
     
     $stateProvider
       .state('<%= name %>', {
+        url: '/<%= name %>',
         abstract: true,
         template: '<ui-view></ui-view>'
       });
