@@ -5,11 +5,9 @@
     $stateProvider
       .state('<%= name %>.main', {
         url: '/main',
+        abstract: true,
         templateUrl: 'main/main.tpl.html',
         controller: 'MainController'
       });
-  })
-  .controller('MainController', function ($scope) {
-    $scope.message = 'Yo';
   });
 }(angular));
