@@ -10,6 +10,6 @@
       });
   })
   .controller('MainController', function ($scope) {
-    
+    $scope.message = 'Yo';
   });
 }(angular));

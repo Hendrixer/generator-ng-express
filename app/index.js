@@ -193,7 +193,7 @@ var NgExpressGenerator = yeoman.generators.Base.extend({
     }
 
     if (this.ngFx) {
-      injectables.push("'ngFx");
+      injectables.push("'ngFx'");
     }
     if (this.ngRoute) {
       injectables.push("'ngRoute'");

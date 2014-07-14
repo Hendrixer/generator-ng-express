@@ -3,7 +3,7 @@ angular.module('<%= name %>.main.note', ['ui.router'])
 .config(function (<%= providers %>) {
 
   $stateProvider
-    .state('<%= name %>.main.note', {
+    .state('<%= name %>.main.notes', {
       url: '/notes',
       templateUrl: 'note/note.tpl.html',
       controller: 'NoteController'

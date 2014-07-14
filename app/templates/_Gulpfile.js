@@ -6,9 +6,8 @@ var gulp    = require('gulp'),
     notify  = require('gulp-notify'),
     plumber = require('gulp-plumber'),
     client  = require('tiny-lr')(),
-    list    = require('gulp-task-listing'),
     nodemon = require('gulp-nodemon'),
-    lr_port = 35729,
+    lr_port = 35728,
     <% if (cssPre !== 'none') {%><%= cssPre %>   = require('gulp-<%= cssPre %>');<% } %>
 
 
