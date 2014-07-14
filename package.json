@@ -1,6 +1,6 @@
 {
   "name": "generator-ng-express",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
