@@ -9,7 +9,7 @@
         controller: 'MainController'
       });
   })
-  .controller('MainController', function ($state) {
-    $state.transitionTo('<%= name %>.main.note');
+  .controller('MainController', function ($scope) {
+    
   });
 }(angular));
