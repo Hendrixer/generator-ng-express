@@ -10,5 +10,5 @@ angular.module('<%= name %>.main.note', ['ui.router'])
     });
 })
 .controller('NoteController', function ($scope) {
-  $scope.notes = [];
+  $scope.message = 'Yooo!';
 });

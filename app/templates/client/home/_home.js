@@ -6,8 +6,7 @@
       .state('<%= name %>.main', {
         url: '/main',
         abstract: true,
-        templateUrl: 'main/main.tpl.html',
-        controller: 'MainController'
+        templateUrl: 'main/main.tpl.html'
       });
   });
 }(angular));
